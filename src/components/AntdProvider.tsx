@@ -13,6 +13,10 @@ export default function AntdProvider({ children }: Props) {
     <ConfigProvider
       theme={{
         hashed: false,
+        token: {
+          colorPrimary: '#82ae46',
+          colorPrimaryBg: '#82ae46',
+        },
       }}
       locale={viVN}
     >

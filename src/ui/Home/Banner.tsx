@@ -1,5 +1,6 @@
 'use client';
 
+import { Amatic_SC } from 'next/font/google';
 import { Carousel } from 'antd';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -9,6 +10,11 @@ type ItemProps = {
   text: string;
   des: string;
 };
+
+const amaticSC = Amatic_SC({
+  weight: '400',
+  subsets:['latin']
+});
 
 const ItemWrapper = styled.div`
   background: url(${({ bg }) => bg}) center center / cover no-repeat;
@@ -36,11 +42,10 @@ const ItemWrapper = styled.div`
     flex-direction: column;
     margin: auto;
     h1 {
-      font-size: 5vw;
+      font-size: 8vw;
       color: #fff;
-      line-height: 1.6;
+      line-height: 1.3;
       font-weight: 400;
-      font-family: 'Amatic SC', cursive;
     }
     h2 {
       font-weight: 300;
@@ -51,14 +56,6 @@ const ItemWrapper = styled.div`
       color: #fff;
       margin: 1.5rem 0 3rem;
     }
-    .link {
-      color: #fff;
-      border-radius: 30px;
-      padding: 0.375rem 0.75rem;
-      font-size: 1rem;
-      line-height: 1.5;
-      text-align: center;
-    }
   }
 `;
 
@@ -66,9 +63,11 @@ const Item = ({ img, text, des }: ItemProps) => (
   <ItemWrapper bg={img}>
     <div className='overlay' />
     <div className='sub container max-w-container'>
-      <h1>{text}</h1>
+      <h1 className={amaticSC.className}>{text}</h1>
       <h2>{des}</h2>
-      <Link href="/shop" className="link bg-primary">View Details</Link>
+      <Link href='/shop' className='btn-primary'>
+        Xem chi tiết
+      </Link>
     </div>
   </ItemWrapper>
 );

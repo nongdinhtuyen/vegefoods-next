@@ -2,9 +2,9 @@
 node_modules
 package-lock.json
 package.json
-public
 dist
 *.md
+.next
 
 # Ignore all HTML files:
 *.html

@@ -41,7 +41,7 @@ export default function CircleIcon() {
       <div className='icon'>
         <Image src={img} width={50} alt='img' height={50} />
       </div>
-      <h3 className='text-center text-base font-medium uppercase mb-3 mt-3'>{text}</h3>
+      <h3 className='text-center text-base font-medium uppercase mb-1 mt-4'>{text}</h3>
       <div className='opacity-50 text-center text-sm'>{des}</div>
     </IconWrapper>
   );

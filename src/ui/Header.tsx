@@ -24,7 +24,7 @@ export default function Header() {
   };
 
   return (
-    <div id='area' className={classNames('header')}>
+    <header id='area' className={classNames('header')}>
       <div className='bg-primary py-1'>
         <div className='container m-auto max-w-container'>
           <div className='flex items-center justify-between'>
@@ -65,6 +65,6 @@ export default function Header() {
           )}
         </div>
       </div>
-    </div>
+    </header>
   );
 }
