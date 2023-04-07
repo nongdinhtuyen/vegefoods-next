@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -19,6 +19,7 @@
     "immer": "^9.0.21",
     "lodash": "4.17.21",
     "next": "13.2.4",
+    "query-string": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "4.8.0",
@@ -26,6 +27,7 @@
     "redux-saga": "^1.2.3",
     "sass": "^1.60.0",
     "styled-components": "6.0.0-beta.2",
+    "swr": "^2.1.2",
     "use-immer": "^0.9.0"
   },
   "devDependencies": {

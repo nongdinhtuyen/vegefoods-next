@@ -23,10 +23,7 @@ export type GetListProductsType = {
   current?: number;
   count?: number;
   productType?: number;
-};
-
-export type ShopChildProps = {
-  products: Draft;
+  params?: any
 };
 
 export type ProductProps = {

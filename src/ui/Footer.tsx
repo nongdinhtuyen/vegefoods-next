@@ -16,7 +16,7 @@ export default function Footer() {
   };
 
   return (
-    <footer>
+    <footer className="mt-20">
       <div className='bg-[#f7f6f2] py-24 relative'>
         <div className='container max-w-container m-auto flex items-center'>
           <div className='flex-1'>

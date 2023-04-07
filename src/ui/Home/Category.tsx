@@ -11,7 +11,7 @@ const lora = Lora({
 
 function Categories() {
   return (
-    <div className='container max-w-container flex m-auto gap-x-6 py-24'>
+    <div className='container max-w-container flex m-auto gap-x-6'>
       <div className='flex-1 flex flex-col justify-between'>
         <Image src='/images/category-1.jpg' alt='' width='0' className='w-full' sizes='100vw' height={250} />
         <Image src='/images/category-2.jpg' alt='' width='0' className='w-full' sizes='100vw' height={250} />

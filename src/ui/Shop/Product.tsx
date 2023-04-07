@@ -1,63 +1,47 @@
 'use client';
 
-import { Draft, GetListProductsType, ProductProps, ShopChildProps } from './shop';
-import { getBaseUrlImage } from '@/lib/getBaseUrl';
-import productActions from '@/redux/actions/product';
+import { ProductProps } from './shop';
+import { DEFAULT_PAGE_SIZE_MEDIUM } from '@/consts';
 import { Pagination } from 'antd';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useImmer } from 'use-immer';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import _ from 'lodash';
-import { DEFAULT_PAGE_SIZE_MEDIUM } from '@/consts';
 
 export default function Product({ children, listProductTypes, total = 0 }: ProductProps) {
-  const dispatch = useDispatch();
-  const [_products, setProducts] = useImmer<Draft>({
-    total: 0,
-    current: 1,
-    data: [],
-  });
-  const [_productTypes, setProductTypes] = useImmer<Draft>({
-    total: 0,
-    current: 1,
-    data: [],
-  });
+  const router = useRouter();
+  const searchParams = useSearchParams()!;
+  const pathname = usePathname();
+  const [_currentPage, setCurrentPage] = useState(Number(searchParams?.get('current') || 1));
   const [_selectType, setSelectType] = useState(0);
-
-  const getListProducts = ({ current = 1, productType = 0 }: GetListProductsType = {}) => {
-    dispatch(
-      productActions.actionGetProducts({
-        params: {
-          current,
-          productType,
-        },
-        callbacks: {
-          onSuccess({ data, total }) {
-            setProducts((draft) => {
-              draft.total = total;
-              draft.data = data;
-            });
-          },
-        },
-      })
-    );
-  };
-
-  // useEffect(() => {
-  //   getListProducts();
-  //   getProductTypes();
-  // item.fetchProduct({ current: 1 });
-  // }, []);
 
   const changeTypes = (index: string | number) => {
     // setSelectType(index);
     // getListProducts({ productType: index });
+  };
+
+  const createQuery = useCallback(
+    (params = {}) => {
+      const query = new URLSearchParams(searchParams);
+      if (!_.isEmpty(params)) {
+        _.forEach(params, (value, name) => {
+          if (query.has(name)) {
+            query.set(name, value);
+          } else {
+            query.append(name, value);
+          }
+        });
+      }
+      return query.toString();
+    },
+    [searchParams]
+  );
+
+  const fetchData = ({ page = 1, type = 0 }: { page?: number; type?: number }) => {
+    setCurrentPage(page);
+    const queryParams = createQuery({ current: page, type });
+    router.push(`${pathname}?${queryParams}`);
   };
 
   return (
@@ -79,15 +63,13 @@ export default function Product({ children, listProductTypes, total = 0 }: Produ
         ))}
       </div>
       {React.Children.map(children, (child) => {
-        return React.cloneElement(child as React.ReactElement<ShopChildProps>, {
-          products: _products,
-        });
+        return React.cloneElement(child as React.ReactElement<any>, {});
       })}
-      <div className='col text-center'>
+      <div className='mt-4 text-center'>
         <Pagination
-          // onChange={props.onPageChange}
+          onChange={(page) => fetchData({ page })}
           showSizeChanger={false}
-          defaultCurrent={1}
+          current={_currentPage}
           pageSize={DEFAULT_PAGE_SIZE_MEDIUM}
           total={total}
           hideOnSinglePage={true}

@@ -11,10 +11,10 @@ type Props = {
 
 export default function ListItems({ listItems }: Props) {
   return (
-    <div className='flex flex-wrap justify-between items-center'>
+    <div className='flex flex-wrap justify-between'>
       {_.map(listItems, (item: ListProductsType, index) => (
-        <div key={index} className='w-[23%] h-full'>
-          <Link href={`/product/${item.id}`} className=' overflow-hidden'>
+        <div key={index} className='w-[23%] flex flex-col'>
+          <Link href={`/product/${item.id}`} className=' overflow-hidden flex flex-1'>
             <Image
               className='h-auto w-full hover:scale-110 transition duration-300 object-contain'
               src={getBaseUrlImage(item.img)}
