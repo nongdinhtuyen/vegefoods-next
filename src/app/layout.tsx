@@ -1,26 +1,26 @@
-import AntdProvider from '@/components/AntdProvider';
 import Footer from '@/ui/Footer';
 import Header from '@/ui/Header';
 import type { Metadata } from 'next';
 
 import '@/styles/globals.css';
 import '@/styles/index.scss';
+import AppProvider from '@/components/AppProvider';
 
 export const metadata: Metadata = {
   title: 'VegeFoods',
   description: 'Bán hoa quả online',
-  icons: "/bg_1.jpg"
+  icons: "/apple-touch-icon.png"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='vi'>
       <body>
-        <AntdProvider>
+        <AppProvider>
           <Header />
           {children}
           <Footer />
-        </AntdProvider>
+        </AppProvider>
       </body>
     </html>
   );

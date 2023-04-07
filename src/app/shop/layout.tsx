@@ -1,4 +1,3 @@
-import AntdProvider from '@/components/AntdProvider';
 import Footer from '@/ui/Footer';
 import Header from '@/ui/Header';
 
